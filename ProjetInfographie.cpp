@@ -29,15 +29,14 @@ using namespace cv::face;
 using namespace std;
 
 
-// Gaussian blur
+// Apply a Gaussian blur to the entire training sample with 4 levels
 static void blurImages(Mat img, int label, vector<Mat>& images, vector<int>& labels)
 {
-	for (int i = 10; i < 50; i+= 10)
+	for (int i = 11; i < 51; i+= 10)
 	{
 		Mat img2 = img.clone();
 
-		GaussianBlur(img, img2, Size(i, i), 0, 0);
-
+		GaussianBlur(img, img2, Size(i, i), 0);
 		images.push_back(img2);
 		labels.push_back(label);
 	}
@@ -130,9 +129,9 @@ int main(int argc, const char* argv[]) {
 	int testLabel;
 	try
 	{
-		testSample = imread("imagesTest/0.jpg", 0);
-		GaussianBlur(testSample, testSample, Size(50, 50), 0, 0);
-		testLabel = 0;
+		testSample = imread("imagesTest/4.jpg", 0);
+		GaussianBlur(testSample, testSample, Size(51, 51), 0, 0);
+		testLabel = 4;
 	}
 	catch (Exception e)
 	{
